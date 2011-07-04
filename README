@@ -7,6 +7,16 @@ zypp-plugin-python: This API allows writing ZYpp plugins by
 just subclassing from a python class and implementing the commands
 you want to respond to as python methods.
 
+See also http://doc.opensuse.org/projects/libzypp/HEAD/zypp-plugins.html
+
 ==Requirements
 
 libzypp providing 'libzypp(plugin)' is required.
+
+==Sources
+
+A git repo is maintained at https://gitorious.org/opensuse/zypp-plugin
+
+==Todo
+
+Maybe API for ruby, ...
