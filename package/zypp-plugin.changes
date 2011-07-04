@@ -1,0 +1,8 @@
+-------------------------------------------------------------------
+Mon Jul  4 15:16:39 CEST 2011 - ma@suse.de
+
+- Provide zypp-plugin-python as stand alone package so
+  that it can be used in other zypp plugins like snapper.
+  (formerly a subpackage of zypp-plugin-spacewalk)
+- version 0.3
+
