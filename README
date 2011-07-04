@@ -1,0 +1,12 @@
+
+==Introduction
+
+Helper which make writing zypp plugins easier.
+
+zypp-plugin-python: This API allows writing ZYpp plugins by
+just subclassing from a python class and implementing the commands
+you want to respond to as python methods.
+
+==Requirements
+
+libzypp providing 'libzypp(plugin)' is required.
