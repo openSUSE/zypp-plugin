@@ -11,4 +11,4 @@ tarball:
 	git archive --format=tar --prefix=zypp-plugin/ HEAD | bzip2 -c >$(TARBALL)
 
 clean:
-	rm -f $(TARBALL)
+	rm -f package/zypp-plugin*.tar.bz2
