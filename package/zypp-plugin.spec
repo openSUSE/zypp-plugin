@@ -1,13 +1,13 @@
 #
-Name:		zypp-plugin-python
+Name:		zypp-plugin
 Version:	0.3
 Release:	0
 Group:		System/Packages
 License:	GPLv2
 Url:		https://gitorious.org/opensuse/zypp-plugin
-Summary:	Helper that makes writing ZYpp plugins in python easier
+Summary:	Helper that makes writing ZYpp plugins easier
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-Source0:	zypp-plugin.tar.bz2
+Source0:	%{name}-%{version}.tar.bz2
 
 # Actually libzypp(plugin) should be required. Unfortunately the corresponing
 # provides was introduced to late for SUSE Manager/SLE-11-SP1. We do not want to
@@ -18,6 +18,14 @@ BuildRequires:	python-devel
 Requires:	python
 
 %description
+Empty main package. Helper for different languages reside in subpackages.
+
+%package python
+Group:		System/Packages
+License:	GPLv2
+Summary:	Helper that makes writing ZYpp plugins in python easier
+
+%description python
 This API allows writing ZYpp plugins by just subclassing from a python class
 and implementing the commands you want to respond to as python methods.
 
@@ -30,6 +38,6 @@ and implementing the commands you want to respond to as python methods.
 %{__mkdir_p} %{buildroot}%{py_sitedir}
 %{__install} python/zypp_plugin.py %{buildroot}%{py_sitedir}/zypp_plugin.py
 
-%files
+%files python
 %defattr(-,root,root)
 %{py_sitedir}/zypp_plugin.py

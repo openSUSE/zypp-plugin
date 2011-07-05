@@ -1,6 +1,7 @@
 .PHONY:	default_target package tarball
 
-TARBALL=package/zypp-plugin.tar.bz2
+VERSION=$(shell awk '/^Version:/{print $$2}' package/*.spec)
+TARBALL=package/zypp-plugin-$(VERSION).tar.bz2
 
 default_target: package
 
