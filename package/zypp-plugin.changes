@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul  5 12:19:37 CEST 2011 - ma@suse.de
+
+- Fix specfile for factory
+
+-------------------------------------------------------------------
 Mon Jul  4 15:16:39 CEST 2011 - ma@suse.de
 
 - Provide zypp-plugin-python as stand alone package so
