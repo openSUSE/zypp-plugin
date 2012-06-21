@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed May  9 10:01:48 UTC 2012 - coolo@suse.com
+
+- patch license to be in spdx.org format
+
+-------------------------------------------------------------------
 Tue Jul  5 12:19:37 CEST 2011 - ma@suse.de
 
 - Fix specfile for factory

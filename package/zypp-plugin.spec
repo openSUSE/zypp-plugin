@@ -16,7 +16,7 @@ Name:		zypp-plugin
 Version:	0.3
 Release:	0
 Group:		System/Packages
-License:	GPLv2
+License:	GPL-2.0
 Url:		https://gitorious.org/opensuse/zypp-plugin
 Summary:	Helper that makes writing ZYpp plugins easier
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -35,7 +35,7 @@ Empty main package. Helper for different languages reside in subpackages.
 
 %package python
 Group:		System/Packages
-License:	GPLv2
+License:	GPL-2.0
 Summary:	Helper that makes writing ZYpp plugins in python easier
 
 %description python
