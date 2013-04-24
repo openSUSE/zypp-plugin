@@ -30,6 +30,8 @@ Source0:	%{name}-%{version}.tar.bz2
 BuildRequires:	python-devel
 Requires:	python
 
+%{?!py_sitearch: %global py_sitearch %(python -c 'from distutils.sysconfig import get_python_lib; print get_python_lib(True)')}
+
 %description
 Empty main package. Helper for different languages reside in subpackages.
 
@@ -48,9 +50,15 @@ and implementing the commands you want to respond to as python methods.
 %build
 
 %install
-%{__mkdir_p} %{buildroot}%{py_sitedir}
-%{__install} python/zypp_plugin.py %{buildroot}%{py_sitedir}/zypp_plugin.py
+%{__mkdir_p} %{buildroot}%{py_sitearch}
+%{__install} python/zypp_plugin.py %{buildroot}%{py_sitearch}/zypp_plugin.py
+%if 0%{?suse_version}
+pushd $RPM_BUILD_ROOT/%{python_sitearch}
+python %py_libdir/py_compile.py *.py
+python -O %py_libdir/py_compile.py *.py
+popd
+%endif
 
 %files python
 %defattr(-,root,root)
-%{py_sitedir}/zypp_plugin.py
+%{py_sitearch}/*
