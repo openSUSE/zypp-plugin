@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Jan 25 17:21:49 CET 2014 - ma@suse.de
+
+- Add .pyc/.pyo to package
+- version 0.4
+
+-------------------------------------------------------------------
 Wed May  9 10:01:48 UTC 2012 - coolo@suse.com
 
 - patch license to be in spdx.org format
