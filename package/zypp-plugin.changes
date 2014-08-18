@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 18 13:31:39 CEST 2014 - ma@suse.de
+
+- Force usage of the official python VM; no longer use 
+  "/usr/bin/env python" (bnc#889363)
+- version 0.5
+
+-------------------------------------------------------------------
 Sat Jan 25 17:21:49 CET 2014 - ma@suse.de
 
 - Add .pyc/.pyo to package

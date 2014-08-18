@@ -13,7 +13,7 @@
 # published by the Open Source Initiative.
 #
 Name:		zypp-plugin
-Version:	0.4
+Version:	0.5
 Release:	0
 Group:		System/Packages
 License:	GPL-2.0
