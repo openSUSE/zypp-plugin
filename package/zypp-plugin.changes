@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar 10 17:18:59 CET 2015 - lchiquitto@suse.de
+
+- Add COPYING file
+
+-------------------------------------------------------------------
 Mon Aug 18 13:31:39 CEST 2014 - ma@suse.de
 
 - Force usage of the official python VM; no longer use 
