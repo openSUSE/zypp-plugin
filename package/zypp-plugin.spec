@@ -61,4 +61,5 @@ popd
 
 %files python
 %defattr(-,root,root)
+%doc COPYING
 %{py_sitearch}/*
