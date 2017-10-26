@@ -98,8 +98,8 @@ class Plugin:
         self.answer( "ERROR", headers,  body )
 
     def _DISCONNECT(self, headers, body):
-	sys.stdin.close()
-	self.ack( {'exit':'0'}, 'Disconnect' )
+        sys.stdin.close()
+        self.ack( {'exit':'0'}, 'Disconnect' )
 
     def current_frame(self):
         return self.framestack[len(self.framestack) - 1]
@@ -109,12 +109,12 @@ class Plugin:
         if frame:
             self.state = "START"
             self.framestack = []
-	    try:
-		method = getattr(self, frame.command)
-	    except:
-		self.answer( "_ENOMETHOD", { "Command":frame.command } )
-	    else:
-		method(frame.headers, frame.body)
+            try:
+                method = getattr(self, frame.command)
+            except:
+                self.answer( "_ENOMETHOD", { "Command":frame.command } )
+            else:
+                method(frame.headers, frame.body)
 
     def main(self):
         for line in iter(sys.stdin.readline, ''):
@@ -133,18 +133,18 @@ class Plugin:
                 result = re.match("(\w+)\:\s*(.+)", line)
                 if line == "":
                     self.state = "BODY"
-                    #print "wating for body"
+                    #print( "wating for body" )
                     while 1:
                         c = sys.stdin.read(1)
                         if c == chr(0):
-                            #print "got it"
+                            #print( "got it" )
                             break
                         else:
-                            #print "no"
+                            #print( "no" )
                             self.current_frame().body = self.current_frame().body + c
                     self.__collect_frame()
                     if ( sys.stdin.closed ):
-			break
+                        break
                     continue
 
                 elif result:
