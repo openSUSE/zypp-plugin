@@ -2,7 +2,7 @@
 Thu Oct 26 17:14:59 CEST 2017 - ma@suse.de
 
 - Let zypp-plugin-python provide python2-zypp-plugin to be
-  consistent with python3--zypp-plugin.
+  consistent with python3-zypp-plugin.
 - version 0.6.1
 
 -------------------------------------------------------------------
