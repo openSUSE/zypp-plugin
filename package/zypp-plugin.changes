@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 26 12:43:19 CEST 2017 - ma@suse.de
+
+- Fix specfile to be able to build for python3
+- version 0.6
+
+-------------------------------------------------------------------
 Tue Mar 10 17:18:59 CET 2015 - lchiquitto@suse.de
 
 - Add COPYING file
