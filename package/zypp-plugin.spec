@@ -1,7 +1,7 @@
 #
 # spec file for package zypp-plugin
 #
-# Copyright (c) 2011-2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2017 SUSE LINUX GmbH, Nuernberg, Germany.
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -11,38 +11,29 @@
 # case the license is the MIT License). An "Open Source License" is a
 # license that conforms to the Open Source Definition (Version 1.9)
 # published by the Open Source Initiative.
+
+# Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
-Name:		zypp-plugin
-Version:	0.5
-Release:	0
-Group:		System/Packages
-License:	GPL-2.0
-Url:		https://gitorious.org/opensuse/zypp-plugin
-Summary:	Helper that makes writing ZYpp plugins easier
+
+%if 0%{?suse_version} >= 1320
+%global build_py3 1
+%endif
+
+Name:           zypp-plugin
+Version:        0.6
+Release:        0
+Url:            https://gitorious.org/opensuse/zypp-plugin
+Summary:        Helper that makes writing ZYpp plugins easier
+License:        GPL-2.0
+Group:          System/Packages
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-Source0:	%{name}-%{version}.tar.bz2
-
-# Actually libzypp(plugin) should be required. Unfortunately the corresponing
-# provides was introduced to late for SUSE Manager/SLE-11-SP1. We do not want to
-# enforce libzypp update to satisfy this, so the Requires should saty disabled,
-# until libzypp on SUSE Manager/SLE-11-SP1 was updated and provides libzypp(plugin).
-#Requires:	libzypp(plugin)
-BuildRequires:	python-devel
-Requires:	python
-
-%{?!py_sitearch: %global py_sitearch %(python -c 'from distutils.sysconfig import get_python_lib; print get_python_lib(True)')}
+Source0:        %{name}-%{version}.tar.bz2
+%if 0%{?suse_version} >= 1210
+BuildArch:      noarch
+%endif
 
 %description
 Empty main package. Helper for different languages reside in subpackages.
-
-%package python
-Group:		System/Packages
-License:	GPL-2.0
-Summary:	Helper that makes writing ZYpp plugins in python easier
-
-%description python
-This API allows writing ZYpp plugins by just subclassing from a python class
-and implementing the commands you want to respond to as python methods.
 
 %prep
 %setup -q -n zypp-plugin
@@ -50,16 +41,52 @@ and implementing the commands you want to respond to as python methods.
 %build
 
 %install
-%{__mkdir_p} %{buildroot}%{py_sitearch}
-%{__install} python/zypp_plugin.py %{buildroot}%{py_sitearch}/zypp_plugin.py
-%if 0%{?suse_version}
-pushd $RPM_BUILD_ROOT/%{python_sitearch}
-python %py_libdir/py_compile.py *.py
-python -O %py_libdir/py_compile.py *.py
-popd
+%{__mkdir_p} %{buildroot}%{python_sitelib}
+%{__install} python/zypp_plugin.py %{buildroot}%{python_sitelib}/zypp_plugin.py
+%py_compile -O %{buildroot}/%{python_sitelib}
+%if 0%{?build_py3}
+%{__mkdir_p} %{buildroot}%{python3_sitelib}
+%{__install} python/zypp_plugin.py %{buildroot}%{python3_sitelib}/zypp_plugin.py
+%py3_compile -O %{buildroot}/%{python3_sitelib}
 %endif
+
+%if 0%{?build_py3}
+%package -n python3-%{name}
+Summary:        Helper that makes writing ZYpp plugins in python easier
+Group:          System/Packages
+Requires:       python3
+BuildRequires:  python3-devel
+
+%description -n python3-%{name}
+This API allows writing ZYpp plugins by just subclassing from a python class
+and implementing the commands you want to respond to as python methods.
+%endif
+
+%package python
+Summary:        Helper that makes writing ZYpp plugins in python easier
+Group:          System/Packages
+# Actually libzypp(plugin) should be required. Unfortunately the corresponing
+# provides was introduced to late for SUSE Manager/SLE-11-SP1. We do not want to
+# enforce libzypp update to satisfy this, so the Requires should saty disabled,
+# until libzypp on SUSE Manager/SLE-11-SP1 was updated and provides libzypp(plugin).
+#Requires:	libzypp(plugin)
+BuildRequires:  python-devel
+Requires:       python
+
+%description python
+This API allows writing ZYpp plugins by just subclassing from a python class
+and implementing the commands you want to respond to as python methods.
 
 %files python
 %defattr(-,root,root)
 %doc COPYING
-%{py_sitearch}/*
+%{python_sitelib}/*
+
+%if 0%{?build_py3}
+%files -n python3-%{name}
+%defattr(-,root,root)
+%doc COPYING
+%{python3_sitelib}/*
+%endif
+
+%changelog
