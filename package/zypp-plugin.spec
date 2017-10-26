@@ -20,7 +20,7 @@
 %endif
 
 Name:           zypp-plugin
-Version:        0.6
+Version:        0.6.1
 Release:        0
 Url:            https://gitorious.org/opensuse/zypp-plugin
 Summary:        Helper that makes writing ZYpp plugins easier
