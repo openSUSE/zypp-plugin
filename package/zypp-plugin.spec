@@ -65,11 +65,7 @@ and implementing the commands you want to respond to as python methods.
 %package python
 Summary:        Helper that makes writing ZYpp plugins in python easier
 Group:          System/Packages
-# Actually libzypp(plugin) should be required. Unfortunately the corresponing
-# provides was introduced to late for SUSE Manager/SLE-11-SP1. We do not want to
-# enforce libzypp update to satisfy this, so the Requires should saty disabled,
-# until libzypp on SUSE Manager/SLE-11-SP1 was updated and provides libzypp(plugin).
-#Requires:	libzypp(plugin)
+Provides:       python2-%{name}
 BuildRequires:  python-devel
 Requires:       python
 
