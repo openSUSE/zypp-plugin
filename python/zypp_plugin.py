@@ -1,5 +1,3 @@
-#! /usr/bin/python
-#
 # Copyright (c) 2010 Novell, Inc.
 # All Rights Reserved.
 #
