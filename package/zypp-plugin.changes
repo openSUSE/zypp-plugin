@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  9 17:46:45 CET 2017 - ma@suse.de
+
+- Don't use a shebang in the module
+- version 0.6.2
+
+-------------------------------------------------------------------
 Thu Oct 26 17:14:59 CEST 2017 - ma@suse.de
 
 - Let zypp-plugin-python provide python2-zypp-plugin to be
