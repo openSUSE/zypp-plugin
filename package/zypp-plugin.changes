@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec 11 14:15:36 UTC 2017 - tchvatal@suse.com
+
+- Switch to singlespec packaging to make it easy to disable either
+  python3 or python2 plugin and make sure all is buildable
+
+-------------------------------------------------------------------
 Thu Nov  9 17:46:45 CET 2017 - ma@suse.de
 
 - Don't use a shebang in the module
