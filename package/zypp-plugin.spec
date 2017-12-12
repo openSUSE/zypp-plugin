@@ -19,7 +19,7 @@
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 %define oldpython python
 Name:           zypp-plugin
-Version:        0.6.2
+Version:        0.6.3
 Release:        0
 Summary:        Helper that makes writing ZYpp plugins easier
 License:        GPL-2.0
