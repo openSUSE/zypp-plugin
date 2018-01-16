@@ -26,15 +26,16 @@ License:        GPL-2.0
 Group:          System/Packages
 URL:            https://github.com/openSUSE/zypp-plugin
 Source0:        %{name}-%{version}.tar.bz2
+BuildRequires:  python-rpm-macros
 BuildRequires:  %{python_module devel}
 Requires:       python-base
 BuildArch:      noarch
 # provide old names for py2 package
 %ifpython2
-Obsoletes:      %{oldpython}-%{name} < %{version}
-Provides:       %{oldpython}-%{name} = %{version}
-Obsoletes:      %{name}-%{oldpython} < %{version}
-Provides:       %{name}-%{oldpython} = %{version}
+Obsoletes:      %{oldpython}-zypp-plugin < %{version}
+Provides:       %{oldpython}-zypp-plugin = %{version}
+Obsoletes:      zypp-plugin-python < %{version}
+Provides:       zypp-plugin-python = %{version}
 %endif
 %python_subpackages
 
@@ -49,12 +50,12 @@ and implementing the commands you want to respond to as python methods.
 :
 
 %install
-%ifpython2
+%if 0%{?have_python2}
 mkdir -p %{buildroot}%{python_sitelib}
 install python/zypp_plugin.py %{buildroot}%{python_sitelib}/zypp_plugin.py
 %py_compile -O %{buildroot}/%{python_sitelib}
 %endif
-%if "%{python3_bin_suffix}" != ""
+%if 0%{?have_python3}
 mkdir -p %{buildroot}%{python3_sitelib}
 install python/zypp_plugin.py %{buildroot}%{python3_sitelib}/zypp_plugin.py
 %py3_compile -O %{buildroot}/%{python3_sitelib}
