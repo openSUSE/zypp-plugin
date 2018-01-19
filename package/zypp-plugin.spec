@@ -1,7 +1,7 @@
 #
 # spec file for package zypp-plugin
 #
-# Copyright (c) 2017 SUSE LINUX GmbH, Nuernberg, Germany.
+# Copyright (c) 2018 SUSE LINUX GmbH, Nuernberg, Germany.
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -15,29 +15,36 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+%define singlespec_py3 ( 0%{?suse_version} > 1330 )
 
-%{?!python_module:%define python_module() python-%{**} python3-%{**}}
-%define oldpython python
 Name:           zypp-plugin
 Version:        0.6.3
 Release:        0
 Summary:        Helper that makes writing ZYpp plugins easier
 License:        GPL-2.0
 Group:          System/Packages
-URL:            https://github.com/openSUSE/zypp-plugin
+Url:            https://github.com/openSUSE/zypp-plugin
 Source0:        %{name}-%{version}.tar.bz2
-BuildRequires:  python-rpm-macros
-BuildRequires:  %{python_module devel}
-Requires:       python-base
 BuildArch:      noarch
+
+%if %{singlespec_py3}
+%{?!python_module:%define python_module() python-%{**} python3-%{**}}
+BuildRequires:  %{python_module devel}
+BuildRequires:  python-rpm-macros
+Requires:       python-base
 # provide old names for py2 package
-%ifpython2
-Obsoletes:      %{oldpython}-zypp-plugin < %{version}
-Provides:       %{oldpython}-zypp-plugin = %{version}
-Obsoletes:      zypp-plugin-python < %{version}
-Provides:       zypp-plugin-python = %{version}
+%if "%{python_flavor}" == "python2"
+Obsoletes:      zypp-plugin-python < %{version}-%{release}
+Provides:       zypp-plugin-python = %{version}-%{release}
 %endif
 %python_subpackages
+### ----------------------------------------
+### SLE-12* and even older
+%else
+%define have_python2 1
+%define have_python3 0
+%endif
+### ----------------------------------------
 
 %description
 This API allows writing ZYpp plugins by just subclassing from a python class
@@ -61,8 +68,31 @@ install python/zypp_plugin.py %{buildroot}%{python3_sitelib}/zypp_plugin.py
 %py3_compile -O %{buildroot}/%{python3_sitelib}
 %endif
 
+%if %{singlespec_py3}
 %files %{python_files}
 %doc COPYING
 %{python_sitelib}/*
+
+### ----------------------------------------
+### SLE-12* and even older
+%else
+%package -n %{name}-python
+Summary:        Helper that makes writing ZYpp plugins in python easier
+Group:          System/Packages
+Provides:       python2-%{name} = %{version}-%{release}
+BuildRequires:  python-devel
+Requires:       python
+
+%files -n %{name}-python
+%defattr(-,root,root)
+%doc COPYING
+%{python_sitelib}/*
+
+%description -n %{name}-python
+This API allows writing ZYpp plugins by just subclassing from a python class
+and implementing the commands you want to respond to as python methods.
+
+%endif
+### ----------------------------------------
 
 %changelog
