@@ -42,7 +42,11 @@ Provides:       zypp-plugin-python = %{version}-%{release}
 ### SLE-12* and even older
 %else
 %define have_python2 1
+%if ( 0%{?suse_version} == 1315 && 0%{?sle_version} == 120300 )
+%define have_python3 1
+%else
 %define have_python3 0
+%endif
 %endif
 ### ----------------------------------------
 
@@ -92,6 +96,22 @@ Requires:       python
 This API allows writing ZYpp plugins by just subclassing from a python class
 and implementing the commands you want to respond to as python methods.
 
+%if 0%{?have_python3}
+%package -n python3-%{name}
+Summary:        Helper that makes writing ZYpp plugins in python easier
+Group:          System/Packages
+Requires:       python3
+BuildRequires:  python3-devel
+
+%files -n python3-%{name}
+%defattr(-,root,root)
+%doc COPYING
+%{python3_sitelib}/*
+
+%description -n python3-%{name}
+This API allows writing ZYpp plugins by just subclassing from a python class
+and implementing the commands you want to respond to as python methods.
+%endif
 %endif
 ### ----------------------------------------
 
