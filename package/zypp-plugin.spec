@@ -63,12 +63,12 @@ and implementing the commands you want to respond to as python methods.
 %install
 %if 0%{?have_python2}
 mkdir -p %{buildroot}%{python_sitelib}
-install python/zypp_plugin.py %{buildroot}%{python_sitelib}/zypp_plugin.py
+install -m 0644 python/zypp_plugin.py %{buildroot}%{python_sitelib}/zypp_plugin.py
 %py_compile -O %{buildroot}/%{python_sitelib}
 %endif
 %if 0%{?have_python3}
 mkdir -p %{buildroot}%{python3_sitelib}
-install python/zypp_plugin.py %{buildroot}%{python3_sitelib}/zypp_plugin.py
+install -m 0644 python/zypp_plugin.py %{buildroot}%{python3_sitelib}/zypp_plugin.py
 %py3_compile -O %{buildroot}/%{python3_sitelib}
 %endif
 
