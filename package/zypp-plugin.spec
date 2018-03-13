@@ -42,7 +42,7 @@ Provides:       zypp-plugin-python = %{version}-%{release}
 ### SLE-12* and even older
 %else
 %define have_python2 1
-%if ( 0%{?suse_version} == 1315 && 0%{?sle_version} == 120300 )
+%if ( 0%{?suse_version} == 1315 )
 %define have_python3 1
 %else
 %define have_python3 0
