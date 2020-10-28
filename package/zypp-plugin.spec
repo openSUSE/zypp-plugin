@@ -15,6 +15,7 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+
 %define singlespec_py3 ( 0%{?suse_version} > 1330 )
 
 Name:           zypp-plugin
@@ -31,6 +32,7 @@ BuildArch:      noarch
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
 BuildRequires:  %{python_module devel}
 BuildRequires:  python-rpm-macros
+BuildRequires:  fdupes
 Requires:       python-base
 # provide old names for py2 package
 %if "%{python_flavor}" == "python2"
@@ -61,6 +63,16 @@ and implementing the commands you want to respond to as python methods.
 :
 
 %install
+%if %{singlespec_py3}
+%{python_expand #
+mkdir -p %{buildroot}%{$python_sitelib}
+install -m 0644 python/zypp_plugin.py %{buildroot}%{$python_sitelib}/zypp_plugin.py
+# TODO: replace by $python_compileall as soon as it is available sr#843481
+$python -m compileall %{buildroot}%{$python_sitelib}
+$python -O -m compileall %{buildroot}%{$python_sitelib}
+%fdupes %{buildroot}%{$python_sitelib}
+}
+%else
 %if 0%{?have_python2}
 mkdir -p %{buildroot}%{python_sitelib}
 install -m 0644 python/zypp_plugin.py %{buildroot}%{python_sitelib}/zypp_plugin.py
@@ -71,11 +83,13 @@ mkdir -p %{buildroot}%{python3_sitelib}
 install -m 0644 python/zypp_plugin.py %{buildroot}%{python3_sitelib}/zypp_plugin.py
 %py3_compile -O %{buildroot}/%{python3_sitelib}
 %endif
+%endif
 
 %if %{singlespec_py3}
 %files %{python_files}
 %doc COPYING
-%{python_sitelib}/*
+%{python_sitelib}/zypp_plugin*
+%pycache_only %{python_sitelib}/__pycache__/*
 
 ### ----------------------------------------
 ### SLE-12* and even older
