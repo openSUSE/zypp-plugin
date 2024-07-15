@@ -118,7 +118,7 @@ class Plugin:
         for line in iter(sys.stdin.readline, ''):
             line = line.rstrip()
             if self.state == "START":
-                if re.match("[\w]+", line):
+                if re.match("[\w-]+", line):
                     frame = self.Frame(line)
                     self.framestack.append(frame)
                     self.state = "HEADERS"
@@ -128,7 +128,7 @@ class Plugin:
                 else:
                     raise Exception("Expected command")
             if self.state == "HEADERS":
-                result = re.match("(\w+)\:\s*(.+)", line)
+                result = re.match("([\w-]+)\:\s*(.+)", line)
                 if line == "":
                     self.state = "BODY"
                     #print( "wating for body" )
