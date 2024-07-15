@@ -1,5 +1,5 @@
 -------------------------------------------------------------------
-Mon 15 Jul 15:51:49 CEST 2024 - ma@suse.com
+Mon Jul 15 15:51:49 CEST 2024 - ma@suse.com
 
 - Fix stomp header regex to include '-' (bsc#1227793)
 - version 0.6.4
