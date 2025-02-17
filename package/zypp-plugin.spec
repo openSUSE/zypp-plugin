@@ -29,7 +29,12 @@ Source0:        %{name}-%{version}.tar.bz2
 BuildArch:      noarch
 
 %if %{singlespec_py3}
+if 0%{?suse_version} >= 1500
+%{?sle15allpythons}
+%else
 %{?!python_module:%define python_module() python-%{**} python3-%{**}}
+%endif
+
 BuildRequires:  %{python_module devel}
 BuildRequires:  python-rpm-macros
 BuildRequires:  fdupes
