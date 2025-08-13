@@ -65,7 +65,7 @@ class Plugin:
     attempt to kill the script. An exit value different than 0 may be set via an
     'exit' header in ACK.
 
-    See also http://doc.opensuse.org/projects/libzypp/HEAD/zypp-plugins.html
+    See also https://opensuse.github.io/libzypp/zypp-plugins.html
     """
 
     def __init__(self):
